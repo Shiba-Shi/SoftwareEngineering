@@ -4,11 +4,14 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JList;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import java.awt.BorderLayout;
+import javax.swing.JTextArea;
 
 public class Cleaner extends JFrame {
 
@@ -22,7 +25,7 @@ public class Cleaner extends JFrame {
 			public void run() {
 				try {
 					Cleaner frame = new Cleaner();
-					//if(cleanTable.needCleanedTable())
+					if(CleanTable.needCleanedTable())
 						frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,17 +38,8 @@ public class Cleaner extends JFrame {
 	 * Create the frame.
 	 */
 	
-	class newString{
-		static int num = 0;
-	}
-	
-	public void setLable(String tableNum) {
-		JLabel lblNewLabel = new JLabel(tableNum);
-		lblNewLabel.setBounds(10+newString.num/4*90, 10+newString.num%4*90, 80, 80);
-		lblNewLabel.setHorizontalTextPosition(JLabel.CENTER);
-		lblNewLabel.setVerticalTextPosition(JLabel.CENTER);
-		contentPane.add(lblNewLabel);
-		newString.num++;
+	public void setLable(String tableNum, JTextArea textArea) {
+		textArea.append(tableNum+"\n");
 	}
 	
 	public Cleaner() {
@@ -54,11 +48,21 @@ public class Cleaner extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		for(String tableNum : CleanTable.newTable.needCleanedTableNum) {
-			setLable(tableNum);
-		}
-		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 436, 263);
+		contentPane.add(panel);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setLineWrap(true);
+		JScrollPane jScrollPane = new JScrollPane(textArea);
+		panel.add(jScrollPane, BorderLayout.CENTER);
+		
+		for(String tableNum : CleanTable.newTable.needCleanedTableNum) {
+			setLable(tableNum, textArea);
+		}
 	}
 }

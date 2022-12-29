@@ -12,6 +12,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Font;
 
 public class CleanTable extends JFrame {
 
@@ -161,7 +162,10 @@ public class CleanTable extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				newTable.Flag = false;
 				setTable(newTable.i);
-				btnNewButton_4.setBounds(40+(newTable.i)/4*90, 30+(newTable.i)%4*90, 50, 50);
+				if(newTable.i < 28)
+					btnNewButton_4.setBounds(40+(newTable.i)/4*90, 30+(newTable.i)%4*90, 50, 50);
+				else
+					contentPane.remove(btnNewButton_4);
 				if(newTable.Flag) {
 					newTable.i++;
 					newTable.Flag = false;
@@ -171,6 +175,25 @@ public class CleanTable extends JFrame {
 
 		btnNewButton_4.setBounds(130, 30, 50, 50);
 		contentPane.add(btnNewButton_4);
+		
+		JButton btnNewButton_5 = new JButton("送出");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Cleaner frame = new Cleaner();
+							//if(cleanTable.needCleanedTable())
+								frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
+		btnNewButton_5.setBounds(275, 370, 85, 33);
+		contentPane.add(btnNewButton_5);
 		
 	}
 }
