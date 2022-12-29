@@ -24,9 +24,9 @@ public class Cleaner extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cleaner frame = new Cleaner();
+					Cleaner frame1 = new Cleaner();
 					if(CleanTable.needCleanedTable())
-						frame.setVisible(true);
+						frame1.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -43,7 +43,7 @@ public class Cleaner extends JFrame {
 	}
 	
 	public Cleaner() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
