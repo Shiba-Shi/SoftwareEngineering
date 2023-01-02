@@ -209,10 +209,12 @@ public class Order extends JFrame {
 		JButton btnNewButton_1 = new JButton("送出");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				checkTextArea.append(mealTextArea.getText());
-				mealTextArea.setText("第" + tableNum + "桌\n");
-				JFrame jFrame = new JFrame();
-		        JOptionPane.showMessageDialog(jFrame, "餐點已送出!");
+				if(!mealTextArea.getText().equals("第" + tableNum + "桌\n")) {
+					checkTextArea.append(mealTextArea.getText());
+					mealTextArea.setText("第" + tableNum + "桌\n");
+					JFrame jFrame = new JFrame();
+			        JOptionPane.showMessageDialog(jFrame, "餐點已送出!");
+				}
 			}
 		});
 		btnNewButton_1.setFont(new Font("微軟正黑體", Font.PLAIN, 16));
